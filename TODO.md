@@ -2,8 +2,10 @@
 - [x] Implement core Python classes (`ImageLayout`, Enums).
 - [x] Define common layouts.
 - [x] Add multilingual documentation support (EN, RU).
-- [ ] Implement layout utility functions (e.g., `are_layouts_memory_equivalent`).
-- [ ] Write unit tests for core and common layouts.
-- [ ] Implement the first backend for `numpy`.
-- [ ] Write unit tests for the `numpy` backend.
+- [x] Implement layout utility functions (`are_layouts_memory_equivalent`).
+- [x] Write unit tests for core and common layouts.
+- [x] Set up CI with GitHub Actions for automated testing.
+- [x] Implement the first backend for `numpy`.
+- [x] Write unit tests for the `numpy` backend.
 - [ ] Publish the first version of the Python package.
+- [ ] Update documentation with `numpy` backend examples.
