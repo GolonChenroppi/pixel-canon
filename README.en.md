@@ -1,8 +1,3 @@
-<div align="center">
-  <a href="./README.md"><strong>English</strong></a> | <a href="./README.ru.md">Русский</a>
-</div>
-<hr>
-
 # Pixel-Canon
 
 > The canon for pixel data topology. A cross-language specification to define the logical layout of images (axis order, orientation, and memory order).

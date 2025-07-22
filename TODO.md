@@ -1,6 +1,7 @@
 - [x] Create project structure and formal specification.
 - [x] Implement core Python classes (`ImageLayout`, Enums).
 - [x] Define common layouts.
+- [x] Add multilingual documentation support (EN, RU).
 - [ ] Implement layout utility functions (e.g., `are_layouts_memory_equivalent`).
 - [ ] Write unit tests for core and common layouts.
 - [ ] Implement the first backend for `numpy`.
