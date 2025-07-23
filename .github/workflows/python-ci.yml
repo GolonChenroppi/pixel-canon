@@ -1,16 +1,15 @@
 # This workflow will install Python dependencies and run tests
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Python CI
 
 on:
   push:
-    branches: [ "main" ] # Запускать при пуше в main
+    branches: [ "main" ]
     paths:
-      - 'python/**'   # Только если изменения в папке python/
+      - 'python/**'
       - '.github/workflows/python-ci.yml'
   pull_request:
-    branches: [ "main" ] # Запускать при pull request в main
+    branches: [ "main" ]
     paths:
       - 'python/**'
       - '.github/workflows/python-ci.yml'
@@ -22,6 +21,7 @@ jobs:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
+    # Устанавливаем рабочую директорию по умолчанию для всех шагов
     defaults:
       run:
         working-directory: ./python
@@ -38,7 +38,6 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Install the package in editable mode with numpy as a dependency for tests
         pip install -e ".[numpy]"
 
     - name: Run tests

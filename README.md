@@ -7,19 +7,9 @@
 
 > The canon for pixel data topology. A cross-language specification to define the logical layout of images (axis order, orientation, and memory order).
 
-`Pixel-Canon` is a cross-language project aimed at solving a common and frustrating problem in computer vision, image processing, and machine learning: the ambiguity of image data layouts. When you receive an N-dimensional array, what do the axes mean? Is it `(Height, Width, Channels)` or `(Channels, Height, Width)`? Does the Y-axis point up or down? Are the data stored in C-style (row-major) or Fortran-style (column-major) order?
+`Pixel-Canon` is a cross-language project aimed at solving a common and frustrating problem in computer vision and machine learning: the ambiguity of image data layouts. Is it `(Height, Width, Channels)` or `(Channels, Height, Width)`? Does the Y-axis point up or down?
 
-This project provides a simple, declarative specification and a set of tools to describe this information explicitly, eliminating guesswork and making data pipelines more robust and reliable.
-
-## Core Concepts
-
-The specification is built on a few core components:
-
-*   **`ImageAxis`**: The name of an axis (e.g., `WIDTH`, `HEIGHT`, `CHANNELS`).
-*   **`AxisDirection`**: The orientation of an axis (e.g., `UP`, `DOWN`, `LEFT`, `RIGHT`).
-*   **`MemoryOrder`**: The physical layout in memory (`ROW_MAJOR` or `COLUMN_MAJOR`).
-*   **`ChannelFormat`**: The semantic order of channels (`RGB`, `BGR`, `RGBA`).
-*   **`ImageLayout`**: A composite object that combines all of the above to provide a complete, unambiguous description.
+This project provides a simple, declarative specification and a set of tools to describe this information explicitly, eliminating guesswork and making data pipelines more robust.
 
 ## The Specification
 
@@ -28,8 +18,44 @@ The formal specification, which all language-specific implementations must adher
 
 ## Implementations
 
-*   **[Python](./python/)** (In Progress)
-*   *Other languages to be added.*
+### **[Python](./python/)** (`pixel-canon` on PyPI)
+
+The Python implementation is available and includes a backend for `numpy`.
+
+**Installation:**
+```bash
+# Core library
+pip install pixel-canon
+
+# With NumPy support
+pip install "pixel-canon[numpy]"
+```
+
+**Example Usage:**
+```python
+import numpy as np
+from pixel_canon import CommonLayouts
+from pixel_canon.backends.numpy_backend import convert_numpy
+
+# Image from OpenCV (HWC, BGR)
+# NOTE: OpenCV uses BGR, but we'll use an RGB layout for this example.
+image_hwc = np.zeros((480, 640, 3), dtype=np.uint8)
+layout_hwc = CommonLayouts.HWC_ROW_MAJOR_RGB
+
+# Target layout for a PyTorch model (CHW, RGB)
+layout_chw = CommonLayouts.CHW_ROW_MAJOR_RGB
+
+# Safely convert the layout
+image_chw = convert_numpy(image_hwc, src=layout_hwc, dst=layout_chw)
+
+print(f"Original shape: {image_hwc.shape}")
+print(f"Converted shape: {image_chw.shape}")
+# Original shape: (480, 640, 3)
+# Converted shape: (3, 480, 640)
+```
+
+### *Other Languages*
+Implementations for Rust, TypeScript, Java, and other languages are planned. Contributions are welcome!
 
 ## License
 
